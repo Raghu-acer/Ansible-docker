@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage('SCM'){
             steps{
-                git credentialsId: 'git', url: 'https://github.com/Raghu-acer/Ansible-docker.git'
+                git credentialsId: 'git', url: 'https://github.com/Raghu-acer/deploy-docker.git'
             }
         }
         
