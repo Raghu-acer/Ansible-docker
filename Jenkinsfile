@@ -22,22 +22,6 @@ pipeline{
                 sh "docker build . -t raghudusa/gameoflife:${DOCKER_TAG} "
             }
         }
-        
-        stage('DockerHub Push'){
-            steps{
-                withCredentials([string(credentialsId: 'raghudusa', variable: 'dockerhub')]) {
-                    sh "docker login -u raghudusa -p ${dockerhub}"
-                }
-                
-                sh "docker push raghudusa/gameoflife:${DOCKER_TAG} "
-            }
-        }
-        
-        stage('Docker Deploy'){
-            steps{
-              ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, extras: 'DOCKER_TAG', installation: 'Ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
-            }
-        }
     }
 }
 
